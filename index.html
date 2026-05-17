@@ -187,9 +187,15 @@
     .form-note { font: 400 11px/1.5 'Inter', sans-serif; letter-spacing: 0.05em; text-transform: uppercase; color: var(--c-mute); }
 
     .success-msg { display: none; max-width: 460px; margin: 0 auto; padding: 48px 0; text-align: center; }
-    .success-msg h3 { font: 700 1.5rem/1.2 'Inter', sans-serif; letter-spacing: -0.02em; color: var(--c-ink); margin-bottom: 12px; }
-    .success-msg p { font-size: 15px; line-height: 1.65; color: var(--c-ink-2); }
     .success-msg.visible { display: block; }
+    .success-icon {
+      width: 48px; height: 48px; border-radius: 999px;
+      background: var(--c-navy); color: var(--c-paper);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .success-msg h3 { font: 700 1.5rem/1.2 'Inter', sans-serif; letter-spacing: -0.02em; color: var(--c-ink); margin-bottom: 10px; }
+    .success-msg p { font-size: 15px; line-height: 1.65; color: var(--c-ink-2); }
 
     /* Footer */
     footer { background: var(--c-ink); padding: 32px 0; }
@@ -312,8 +318,13 @@
         </form>
 
         <div id="success-msg" class="success-msg">
-          <h3>Recebemos seu contato.</h3>
-          <p>A Voltra ainda não foi lançada — mas assim que estivermos disponíveis, entraremos em contato com você.</p>
+          <div class="success-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <h3>Interesse registrado.</h3>
+          <p>Obrigado pelo contato. A Voltra ainda não foi lançada — assim que estivermos disponíveis em Natal, você será um dos primeiros a saber.</p>
         </div>
       </div>
     </div>
