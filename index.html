@@ -70,8 +70,6 @@
     a { color: inherit; text-decoration: none; }
     em { color: var(--c-azure); font-style: italic; }
     button { font-family: inherit; }
-
-    /* ── Anchor offset for fixed nav ── */
     #como-funciona, #contato { scroll-margin-top: 80px; }
 
     /* ── Layout ── */
@@ -91,9 +89,9 @@
     .btn-primary {
       display: inline-flex; align-items: center; gap: 10px;
       background: var(--c-ink); color: var(--c-paper);
-      padding: 14px 24px; border-radius: 999px;
+      padding: 15px 26px; border-radius: 999px;
       font: 500 14px/1 'Geist', sans-serif; letter-spacing: 0.01em;
-      border: none; cursor: pointer; transition: background 0.15s;
+      border: none; cursor: pointer; transition: background 0.2s;
     }
     .btn-primary:hover { background: var(--c-navy); }
     .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -101,17 +99,20 @@
     .btn-secondary {
       display: inline-flex; align-items: center; gap: 10px;
       background: transparent; color: var(--c-ink);
-      padding: 13px 23px; border-radius: 999px;
-      border: 1px solid var(--c-ink);
+      padding: 14px 25px; border-radius: 999px;
+      border: 1px solid rgba(5,8,22,0.25);
       font: 500 14px/1 'Geist', sans-serif; letter-spacing: 0.01em;
-      cursor: pointer; transition: border-color 0.15s, color 0.15s;
+      cursor: pointer; transition: border-color 0.2s, color 0.2s;
     }
-    .btn-secondary:hover { border-color: var(--c-navy); color: var(--c-navy); }
+    .btn-secondary:hover { border-color: var(--c-ink); }
 
     /* ── Nav ── */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: var(--c-paper); border-bottom: 1px solid var(--c-rule);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--c-rule);
     }
     .nav-inner {
       max-width: 1200px; margin: 0 auto; padding: 0 64px;
@@ -122,59 +123,180 @@
     .nav-wordmark { font: 500 13px/1 'Geist', sans-serif; letter-spacing: 0.22em; text-transform: uppercase; }
 
     /* ── Hero ── */
-    .hero { padding: 160px 0 120px; background: var(--c-paper); }
-    .hero-inner { max-width: 760px; }
-    .hero .eyebrow { margin-bottom: 32px; }
-    .hero h1 { font-size: clamp(2.75rem, 6.5vw, 5.5rem); line-height: 0.95; margin-bottom: 32px; }
-    .hero-lead { font-size: 18px; line-height: 1.55; max-width: 520px; margin-bottom: 48px; }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 0 100px;
+      background: var(--c-paper);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 80px;
+      align-items: center;
+      width: 100%;
+    }
+    .hero .eyebrow { margin-bottom: 36px; }
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 7rem);
+      line-height: 0.92;
+      margin-bottom: 36px;
+      letter-spacing: -0.02em;
+    }
+    .hero-lead {
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 480px;
+      margin-bottom: 48px;
+    }
     .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .hero-divider {
+      border: none;
+      border-top: 1px solid var(--c-rule);
+      margin-top: 64px;
+    }
+    .hero-stat {
+      display: flex;
+      gap: 48px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .hero-stat-item {}
+    .hero-stat-item .stat-value {
+      font: 400 32px/1 'Instrument Serif', serif;
+      color: var(--c-ink);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .hero-stat-item .stat-label {
+      font: 400 12px/1.4 'Geist Mono', monospace;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--c-mute);
+    }
+
+    /* Hero visual — large Spark mark */
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-mark-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3/4;
+      max-height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--c-rule);
+      background: var(--c-mist);
+      overflow: hidden;
+    }
+    .hero-mark-wrap svg { opacity: 0.18; }
+    .hero-mark-wrap .eyebrow {
+      position: absolute;
+      bottom: 20px;
+      left: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+    }
 
     /* ── Section header ── */
-    .section-header { margin-bottom: 64px; }
+    .section-header { margin-bottom: 72px; }
     .section-header .eyebrow { margin-bottom: 20px; }
-    .section-header h2 { font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.0; }
-    .section-header p { font-size: 18px; line-height: 1.55; max-width: 520px; margin-top: 16px; }
+    .section-header h2 { font-size: clamp(2.2rem, 4.5vw, 4rem); line-height: 0.98; letter-spacing: -0.02em; }
+    .section-header p { font-size: 18px; line-height: 1.6; max-width: 480px; margin-top: 20px; }
 
     /* ── How it works (Mist) ── */
     .how { background: var(--c-mist); padding: 120px 0; }
     .steps { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--c-rule); }
-    .step { padding: 40px 32px; border-right: 1px solid var(--c-rule); }
+    .step { padding: 48px 40px 52px; border-right: 1px solid var(--c-rule); position: relative; }
     .step:last-child { border-right: 0; }
-    .step .eyebrow { margin-bottom: 24px; }
-    .step h3 { font-size: 2rem; line-height: 1.05; margin-bottom: 16px; }
-    .step p { font-size: 15px; line-height: 1.6; }
+    .step-num {
+      font: 400 100px/0.85 'Instrument Serif', serif;
+      color: rgba(5,8,22,0.07);
+      display: block;
+      margin-bottom: 32px;
+      letter-spacing: -0.03em;
+    }
+    .step .eyebrow { margin-bottom: 16px; }
+    .step h3 { font-size: 1.875rem; line-height: 1.05; margin-bottom: 16px; letter-spacing: -0.01em; }
+    .step p { font-size: 15px; line-height: 1.65; }
     @media (max-width: 768px) {
       .steps { grid-template-columns: 1fr; }
       .step { border-right: 0; border-bottom: 1px solid var(--c-rule); }
       .step:last-child { border-bottom: 0; }
+      .step-num { font-size: 72px; }
     }
 
     /* ── Benefits (Navy) ── */
     .benefits { background: var(--c-navy); padding: 120px 0; }
     .benefits .eyebrow { color: rgba(255,255,255,0.35); }
-    .benefits h2 { color: var(--c-paper); font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.0; }
+    .benefits h2 { color: var(--c-paper); font-size: clamp(2.2rem, 4.5vw, 4rem); line-height: 0.98; letter-spacing: -0.02em; }
     .benefits h2 em { color: var(--c-tint); }
-    .benefits .section-header p { color: rgba(255,255,255,0.55); margin-top: 16px; font-size: 18px; line-height: 1.55; max-width: 480px; }
-    .benefit-cards { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid rgba(255,255,255,0.12); }
-    .benefit-card { padding: 40px 32px; border-right: 1px solid rgba(255,255,255,0.12); }
+    .benefits .section-header p { color: rgba(255,255,255,0.5); margin-top: 20px; font-size: 18px; line-height: 1.6; max-width: 480px; }
+
+    /* Pull quote */
+    .benefit-quote {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 56px;
+      margin-bottom: 56px;
+    }
+    .benefit-quote p {
+      font: 400 clamp(1.75rem, 3.5vw, 3rem)/1.15 'Instrument Serif', serif;
+      color: var(--c-paper);
+      letter-spacing: -0.01em;
+      text-wrap: balance;
+    }
+    .benefit-quote em { color: var(--c-tint); }
+
+    .benefit-cards { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid rgba(255,255,255,0.10); }
+    .benefit-card { padding: 40px 36px 48px; border-right: 1px solid rgba(255,255,255,0.10); }
     .benefit-card:last-child { border-right: 0; }
-    .benefit-card .eyebrow { color: rgba(255,255,255,0.3); margin-bottom: 24px; }
-    .benefit-card h3 { font-size: 1.75rem; line-height: 1.1; color: var(--c-paper); margin-bottom: 16px; }
-    .benefit-card p { color: rgba(255,255,255,0.55); font-size: 15px; line-height: 1.6; }
+    .benefit-card .eyebrow { color: rgba(255,255,255,0.28); margin-bottom: 20px; }
+    .benefit-card h3 { font-size: 1.625rem; line-height: 1.1; color: var(--c-paper); margin-bottom: 16px; letter-spacing: -0.01em; }
+    .benefit-card p { color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.65; }
     @media (max-width: 768px) {
       .benefit-cards { grid-template-columns: 1fr; }
-      .benefit-card { border-right: 0; border-bottom: 1px solid rgba(255,255,255,0.12); }
+      .benefit-card { border-right: 0; border-bottom: 1px solid rgba(255,255,255,0.10); }
       .benefit-card:last-child { border-bottom: 0; }
     }
 
     /* ── Form (Paper) ── */
     .form-section { background: var(--c-paper); padding: 120px 0; }
-    .form-wrap { max-width: 640px; margin: 0 auto; }
-    .form-header { margin-bottom: 64px; }
-    .form-header .eyebrow { margin-bottom: 20px; }
-    .form-header h2 { font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.05; }
-    .form-header p { font-size: 18px; line-height: 1.55; margin-top: 16px; }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .form-grid { grid-template-columns: 1fr; gap: 56px; }
+    }
 
+    .form-left {}
+    .form-left .eyebrow { margin-bottom: 20px; }
+    .form-left h2 { font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.02; letter-spacing: -0.02em; margin-bottom: 20px; }
+    .form-left p { font-size: 17px; line-height: 1.6; }
+
+    .form-trust { margin-top: 48px; border-top: 1px solid var(--c-rule); padding-top: 40px; display: flex; flex-direction: column; gap: 0; }
+    .trust-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--c-rule);
+      gap: 16px;
+    }
+    .trust-row .trust-label { font: 500 11px/1 'Geist Mono', monospace; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-mute); }
+    .trust-row .trust-value { font: 400 16px/1 'Instrument Serif', serif; color: var(--c-ink); text-align: right; }
+
+    /* Fields */
     .field { margin-bottom: 40px; }
     .field .eyebrow { margin-bottom: 10px; }
     .field input, .field textarea, .field select {
@@ -193,22 +315,22 @@
     .field input:focus, .field textarea:focus, .field select:focus { border-bottom-color: var(--c-azure); }
     .field textarea { resize: none; font-size: 18px; line-height: 1.5; }
 
-    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
     @media (max-width: 640px) { .field-row { grid-template-columns: 1fr; } }
 
     .char-hint { font: 400 11px/1 'Geist Mono', monospace; letter-spacing: 0.05em; color: var(--c-mute); text-align: right; margin-top: 8px; }
 
     .form-error {
       display: none; font: 400 13px/1.5 'Geist', sans-serif; color: #b91c1c;
-      padding: 12px 16px; border-left: 2px solid #b91c1c; margin-bottom: 24px;
+      padding: 12px 0 12px 16px; border-left: 2px solid #b91c1c; margin-bottom: 24px;
     }
     .form-error.visible { display: block; }
 
     .form-submit { margin-top: 48px; }
     .form-note { font: 400 11px/1.5 'Geist Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-mute); margin-top: 16px; }
 
-    .success-msg { display: none; padding: 80px 0; }
-    .success-msg h3 { font-size: 2.5rem; line-height: 1.1; margin-bottom: 16px; }
+    .success-msg { display: none; padding: 64px 0; }
+    .success-msg h3 { font-size: 2.5rem; line-height: 1.1; margin-bottom: 16px; letter-spacing: -0.02em; }
     .success-msg p { font-size: 18px; }
     .success-msg.visible { display: block; }
 
@@ -220,7 +342,8 @@
     }
     @media (max-width: 768px) { .footer-inner { padding: 0 24px; } }
     .footer-logo { display: inline-flex; align-items: center; gap: 12px; color: var(--c-paper); }
-    .footer-copy { font: 400 11px/1 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+    .footer-wordmark { font: 500 12px/1 'Geist', sans-serif; letter-spacing: 0.22em; text-transform: uppercase; }
+    .footer-copy { font: 400 11px/1 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.22); }
   </style>
 </head>
 <body>
@@ -245,22 +368,49 @@
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
-      <div class="hero-inner">
-        <span class="eyebrow">Recarga elétrica para condomínios — Natal, RN</span>
-        <h1>
-          O morador quer carregar.<br />
-          O condomínio <em>não paga nada.</em>
-        </h1>
-        <p class="hero-lead">
-          A Voltra instala e opera totens de recarga para veículos elétricos em condomínios residenciais. Sem obras complexas. Sem custo para o condomínio — o morador paga pela energia consumida.
-        </p>
-        <div class="hero-ctas">
-          <a
-            href="#contato"
-            class="btn-primary"
-            onclick="gtag('event', 'button_click', {button_name: 'hero_primary_cta', location: 'hero'})"
-          >Quero saber mais</a>
-          <a href="#como-funciona" class="btn-secondary">Como funciona</a>
+      <div class="hero-grid">
+        <div class="hero-left">
+          <span class="eyebrow">Recarga elétrica para condomínios &mdash; Natal, RN</span>
+          <h1>
+            O morador<br />
+            quer carregar.<br />
+            O condomínio<br />
+            <em>não paga nada.</em>
+          </h1>
+          <p class="hero-lead">
+            A Voltra instala e opera totens de recarga para veículos elétricos em condomínios residenciais. Sem obras complexas. Sem custo para o condomínio — o morador paga pela energia consumida.
+          </p>
+          <div class="hero-ctas">
+            <a
+              href="#contato"
+              class="btn-primary"
+              onclick="gtag('event', 'button_click', {button_name: 'hero_primary_cta', location: 'hero'})"
+            >Quero saber mais</a>
+            <a href="#como-funciona" class="btn-secondary">Como funciona</a>
+          </div>
+          <hr class="hero-divider" />
+          <div class="hero-stat">
+            <div class="hero-stat-item">
+              <span class="stat-value">Zero</span>
+              <span class="stat-label">Custo para o condomínio</span>
+            </div>
+            <div class="hero-stat-item">
+              <span class="stat-value">100%</span>
+              <span class="stat-label">Gerido pela Voltra</span>
+            </div>
+            <div class="hero-stat-item">
+              <span class="stat-value">Sem obras</span>
+              <span class="stat-label">Instalação discreta</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-mark-wrap">
+            <svg viewBox="0 0 48 64" width="260" height="346">
+              <polygon points="38,4 8,32 22,32 14,60 44,32 30,32" fill="var(--c-navy)"/>
+            </svg>
+            <span class="eyebrow">Totem Voltra em garagem residencial</span>
+          </div>
         </div>
       </div>
     </div>
@@ -270,23 +420,26 @@
   <section class="how" id="como-funciona">
     <div class="wrap">
       <div class="section-header">
-        <span class="eyebrow">§ 01 — Como funciona</span>
+        <span class="eyebrow">§ 01 &mdash; Como funciona</span>
         <h2>Três etapas.<br /><em>Nenhuma delas é sua.</em></h2>
         <p>A Voltra cuida de tudo — da avaliação técnica ao suporte ao morador. O síndico só precisa dizer sim.</p>
       </div>
       <div class="steps">
         <div class="step">
-          <span class="eyebrow">01 — Instalação</span>
+          <span class="step-num">01</span>
+          <span class="eyebrow">Instalação</span>
           <h3>Nós instalamos</h3>
           <p>Avaliação técnica da garagem, projeto elétrico, instalação dos totens — sem custo inicial para o condomínio.</p>
         </div>
         <div class="step">
-          <span class="eyebrow">02 — Operação</span>
+          <span class="step-num">02</span>
+          <span class="eyebrow">Operação</span>
           <h3>Você oferece</h3>
           <p>Os moradores acessam os totens na própria garagem via aplicativo ou cartão. Sem filas, sem deslocamento.</p>
         </div>
         <div class="step">
-          <span class="eyebrow">03 — Cobrança</span>
+          <span class="step-num">03</span>
+          <span class="eyebrow">Cobrança</span>
           <h3>O morador paga</h3>
           <p>Cada morador paga apenas pela energia consumida. Gestão, manutenção e suporte — tudo pela Voltra.</p>
         </div>
@@ -298,23 +451,26 @@
   <section class="benefits">
     <div class="wrap">
       <div class="section-header">
-        <span class="eyebrow">§ 02 — Por que a Voltra</span>
+        <span class="eyebrow">§ 02 &mdash; Por que a Voltra</span>
         <h2>Para síndicos que querem<br /><em>oferecer mais.</em></h2>
         <p>Sem investimento, sem obras, sem gestão. O condomínio ganha — o síndico não perde tempo.</p>
       </div>
+      <div class="benefit-quote">
+        <p>Sem investimento.<br /><em>Sem obras.</em><br />Sem burocracia.</p>
+      </div>
       <div class="benefit-cards">
         <div class="benefit-card">
-          <span class="eyebrow">01 — Custo</span>
+          <span class="eyebrow">01 &mdash; Custo</span>
           <h3>Zero custo para o condomínio</h3>
           <p>A Voltra arca com toda a instalação. O condomínio não desembolsa nada — quem paga é o morador que usa o totem.</p>
         </div>
         <div class="benefit-card">
-          <span class="eyebrow">02 — Operação</span>
+          <span class="eyebrow">02 &mdash; Operação</span>
           <h3>Sem obra, sem burocracia</h3>
           <p>Instalação discreta na garagem, sem reforma estrutural. A Voltra cuida de projeto, aprovação, instalação e manutenção.</p>
         </div>
         <div class="benefit-card">
-          <span class="eyebrow">03 — Valor</span>
+          <span class="eyebrow">03 &mdash; Valor</span>
           <h3>Valoriza o imóvel</h3>
           <p>Condomínios com recarga elétrica se destacam no mercado imobiliário e atendem uma demanda crescente de moradores.</p>
         </div>
@@ -325,69 +481,91 @@
   <!-- FORM -->
   <section class="form-section" id="contato">
     <div class="wrap">
-      <div class="form-wrap">
-        <div class="form-header">
-          <span class="eyebrow">§ 03 — Contato</span>
+      <div class="form-grid">
+
+        <div class="form-left">
+          <span class="eyebrow">§ 03 &mdash; Contato</span>
           <h2>Quer a Voltra no seu condomínio?</h2>
           <p>Deixe seu contato. Nossa equipe entra em breve para entender as necessidades do seu condomínio.</p>
+          <div class="form-trust">
+            <div class="trust-row">
+              <span class="trust-label">Custo de instalação</span>
+              <span class="trust-value">Zero para o condomínio</span>
+            </div>
+            <div class="trust-row">
+              <span class="trust-label">Obras necessárias</span>
+              <span class="trust-value">Nenhuma</span>
+            </div>
+            <div class="trust-row">
+              <span class="trust-label">Gestão e manutenção</span>
+              <span class="trust-value">100% pela Voltra</span>
+            </div>
+            <div class="trust-row">
+              <span class="trust-label">Cobrança ao morador</span>
+              <span class="trust-value">Por energia consumida</span>
+            </div>
+          </div>
         </div>
 
-        <form id="lead-form" novalidate>
-          <div class="field-row">
-            <div class="field">
-              <label for="nome" class="eyebrow">Nome *</label>
-              <input type="text" id="nome" name="nome" required placeholder="Síndico ou responsável" />
+        <div class="form-right">
+          <form id="lead-form" novalidate>
+            <div class="field-row">
+              <div class="field">
+                <label for="nome" class="eyebrow">Nome *</label>
+                <input type="text" id="nome" name="nome" required placeholder="Síndico ou responsável" />
+              </div>
+              <div class="field">
+                <label for="telefone" class="eyebrow">Telefone *</label>
+                <input
+                  type="tel" id="telefone" name="telefone" required
+                  placeholder="(84) 99999-9999"
+                  maxlength="15"
+                  oninput="maskPhone(this)"
+                />
+              </div>
             </div>
+
             <div class="field">
-              <label for="telefone" class="eyebrow">Telefone *</label>
-              <input
-                type="tel" id="telefone" name="telefone" required
-                placeholder="(84) 99999-9999"
-                maxlength="15"
-                oninput="maskPhone(this)"
-              />
+              <label for="email" class="eyebrow">E-mail *</label>
+              <input type="email" id="email" name="email" required placeholder="seu@email.com" />
             </div>
+
+            <div class="field">
+              <label for="tipo" class="eyebrow">Tipo de condomínio</label>
+              <select id="tipo" name="tipo">
+                <option value="">Selecione...</option>
+                <option value="residencial_vertical">Residencial vertical (apartamentos)</option>
+                <option value="residencial_horizontal">Residencial horizontal (casas)</option>
+                <option value="comercial">Comercial / Empresarial</option>
+                <option value="misto">Misto (residencial + comercial)</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="mensagem" class="eyebrow">Mensagem (opcional)</label>
+              <textarea
+                id="mensagem" name="mensagem" rows="4" maxlength="250"
+                oninput="updateCount(this)"
+                placeholder="Conte um pouco sobre seu condomínio..."
+              ></textarea>
+              <p class="char-hint"><span id="char-count">0</span> / 250</p>
+            </div>
+
+            <div id="form-error" class="form-error"></div>
+
+            <div class="form-submit">
+              <button type="submit" id="submit-btn" class="btn-primary">Quero saber mais</button>
+              <p class="form-note">Seus dados são usados apenas para entrar em contato.</p>
+            </div>
+          </form>
+
+          <div id="success-msg" class="success-msg">
+            <h3>Recebemos seu contato.</h3>
+            <p>Em breve nossa equipe entrará em contato com você.</p>
           </div>
-
-          <div class="field">
-            <label for="email" class="eyebrow">E-mail *</label>
-            <input type="email" id="email" name="email" required placeholder="seu@email.com" />
-          </div>
-
-          <div class="field">
-            <label for="tipo" class="eyebrow">Tipo de condomínio</label>
-            <select id="tipo" name="tipo">
-              <option value="">Selecione...</option>
-              <option value="residencial_vertical">Residencial vertical (apartamentos)</option>
-              <option value="residencial_horizontal">Residencial horizontal (casas)</option>
-              <option value="comercial">Comercial / Empresarial</option>
-              <option value="misto">Misto (residencial + comercial)</option>
-              <option value="outro">Outro</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="mensagem" class="eyebrow">Mensagem (opcional)</label>
-            <textarea
-              id="mensagem" name="mensagem" rows="4" maxlength="250"
-              oninput="updateCount(this)"
-              placeholder="Conte um pouco sobre seu condomínio..."
-            ></textarea>
-            <p class="char-hint"><span id="char-count">0</span> / 250</p>
-          </div>
-
-          <div id="form-error" class="form-error"></div>
-
-          <div class="form-submit">
-            <button type="submit" id="submit-btn" class="btn-primary">Quero saber mais</button>
-            <p class="form-note">Seus dados são usados apenas para entrar em contato.</p>
-          </div>
-        </form>
-
-        <div id="success-msg" class="success-msg">
-          <h3>Recebemos seu contato.</h3>
-          <p>Em breve nossa equipe entrará em contato com você.</p>
         </div>
+
       </div>
     </div>
   </section>
@@ -399,7 +577,7 @@
         <svg viewBox="0 0 48 64" width="16" height="21" aria-hidden="true">
           <polygon points="38,4 8,32 22,32 14,60 44,32 30,32" fill="currentColor"/>
         </svg>
-        <span class="nav-wordmark">Voltra</span>
+        <span class="footer-wordmark">Voltra</span>
       </a>
       <span class="footer-copy">&copy; 2025 Voltra &mdash; Natal, RN, Brasil</span>
     </div>
